@@ -7,7 +7,9 @@ import { Vector as VectorLayer } from "ol/layer";
 import { Vector as VectorSource } from "ol/source";
 import { useState } from "react";
 import { useRef } from "react";
-
+import MapComponent from "./Components/MapComponent/MapComponent";
+import MissionCreationModal from "./Components/MissionCreationModal/MissionCreationModal";
+import PolygonToolModal from "./Components/PolygonToolModal/PolygonToolModal";
 
 function App() {
   const mapElement = useRef(null);
@@ -20,6 +22,22 @@ function App() {
   const [lineStringCoordinates, setLineStringCoordinates] = useState([]);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
   const [dropdownIndex, setDropdownIndex] = useState(null);
+
+  useEffect(() => {
+    if (!mapElement.current) return;
+
+    const vectorLayer = new VectorLayer({ source: vectorSource });
+
+    const mapInstance = new Map({
+      target: mapElement.current,
+      layers: [new TileLayer({ source: new OSM() }), vectorLayer],
+      view: new View({ center: [0, 0], zoom: 3 }),
+    });
+
+    setMap(mapInstance);
+
+    return () => mapInstance.setTarget(null);
+  }, [vectorSource]);
 
   return (
     <>
