@@ -29,4 +29,4 @@ const MapComponent = forwardRef(
   }
 );
 
-export default MapComponent;
+export default MapComponent
