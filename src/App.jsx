@@ -77,10 +77,60 @@ function App() {
     };
   };
 
+  const handleImportPolygon = () => {
+    if (!polygonCoordinates.length || dropdownIndex === null) {
+      console.error("No polygon data or dropdown index specified.");
+      return;
+    }
+
+    setLineStringCoordinates((prev) => {
+      const updated = [...prev];
+      updated.splice(dropdownIndex, 0, ...polygonCoordinates);
+      return updated;
+    });
+
+    console.log("Polygon imported into LineString.");
+    setPolygonModalOpen(false);
+    setDropdownIndex(null);
+  };
+
+  const handleGenerateData = () => {
+    alert(lineStringCoordinates);
+  };
+
+  const handleDropdownAction = (action, index) => {
+    setLineStringModalOpen(false);
+    setPolygonModalOpen(true);
+    const insertIndex = action === "before" ? index : index + 1;
+    setDropdownIndex(insertIndex);
+    startDrawing("Polygon", insertIndex);
+  };
+
   return (
     <>
-      <div className="underline text-sm text-indigo-400">
-        <h1>Vite + React</h1>
+      <div className="h-screen flex flex-col">
+        <MapComponent
+          ref={mapElement}
+          isFirstClick={isFirstClick}
+          handleModalOpen={handleMissionModalOpen}
+          handleDrawingClick={handleDrawingClick}
+        />
+        <MissionCreationModal
+          open={lineStringModalOpen}
+          onClose={setLineStringModalOpen}
+          coordinates={lineStringCoordinates}
+          setDropdownIndex={setDropdownIndex}
+          dropdownIndex={dropdownIndex}
+          handleDropdownAction={handleDropdownAction}
+          handleGenerateData={handleGenerateData}
+        />
+        <PolygonToolModal
+          open={polygonModalOpen}
+          onClose={handlePolygonModalClose}
+          coordinates={polygonCoordinates}
+          handleImportPolygon={handleImportPolygon}
+          handlePolygonModalBackButton={handlePolygonModalBackButton}
+        />
       </div>
     </>
   );
