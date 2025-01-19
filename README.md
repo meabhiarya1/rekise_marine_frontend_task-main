@@ -6,7 +6,7 @@ The Rekise Marine Map App is a web application built with React and OpenLayers t
 
 ## LIVE
 
-https://rekise-marine-frontend-task.vercel.app/
+https://rekise-marine-frontend-task-main.vercel.app/
 
 ## ScreenShots
 
@@ -57,7 +57,6 @@ https://rekise-marine-frontend-task.vercel.app/
 
 -   **React**: A JavaScript library for building user interfaces.
 -   **OpenLayers**: A high-performance library for displaying map data in web browsers.
--   **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
 -   **Headless UI**: A set of completely unstyled, fully accessible UI components designed to integrate beautifully with Tailwind CSS.
 
 ## Installation
@@ -68,8 +67,8 @@ To get started with the Rekise Marine Map App, follow these steps:
    To get a local copy of the code, clone it using git:
 
 ```
-git clone https://github.com/zehan12/rekise_marine_frontend_task/.git
-cd rekise_marine_frontend_task
+git clone https://github.com/meabhiarya1/rekise_marine_frontend_task-main.git
+cd rekise_marine_frontend_task-main
 ```
 
 2. **Install dependencies**:
@@ -83,6 +82,8 @@ npm install
 
 ```
 npm run dev
+or
+npm start
 ```
 
 And then open http://localhost:5173 to view it in the browser.
@@ -107,8 +108,8 @@ Give a ⭐️ if this project helped you!
 The project is under MIT license.
 
 ## Author
-<a href="https://github.com/zehan12">
-<img src="https://avatars.githubusercontent.com/u/73664886?s=400&u=b4640ee6fcf6bdb55f455d2b1ec8d91a330f9b04&v=4" width="100px;" alt="Zehan Khan"/><br />
-<sub><b>Zehan Khan</b></sub>
+<a href="https://github.com/meahbiarya1">
+<img src="https://avatars.githubusercontent.com/u/73664886?s=400&u=b4640ee6fcf6bdb55f455d2b1ec8d91a330f9b04&v=4" width="100px;" alt="Abhishek Kumar"/><br />
+<sub><b>Abhishek Kumar</b></sub>
 </a><br />
-<a href="https://github.com/zehan12/rekise_marine_frontend_task/commits?author=zehan12" title="Code">💻</a>
+<a href="https://github.com/meahbiarya1/rekise_marine_frontend_task/commits?author=meahbiarya1" title="Code">💻</a>
