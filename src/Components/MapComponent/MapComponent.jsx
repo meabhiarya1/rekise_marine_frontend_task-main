@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 
-export const MapComponent = forwardRef(
+const MapComponent = forwardRef(
   ({ handleDrawingClick, handleModalOpen, isFirstClick }, ref) => {
     return (
       <main ref={ref} className="flex-grow relative">
@@ -28,3 +28,5 @@ export const MapComponent = forwardRef(
     );
   }
 );
+
+export default MapComponent;
