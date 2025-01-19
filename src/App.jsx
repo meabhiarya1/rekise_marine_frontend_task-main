@@ -7,6 +7,7 @@ import { Vector as VectorLayer } from "ol/layer";
 import { Vector as VectorSource } from "ol/source";
 import { useState } from "react";
 import { useRef } from "react";
+import { useEffect } from "react";
 import MapComponent from "./Components/MapComponent/MapComponent";
 import MissionCreationModal from "./Components/MissionCreationModal/MissionCreationModal";
 import PolygonToolModal from "./Components/PolygonToolModal/PolygonToolModal";
@@ -38,6 +39,43 @@ function App() {
 
     return () => mapInstance.setTarget(null);
   }, [vectorSource]);
+
+  const startDrawing = (type, insertIndex = null) => {
+    if (!map) return;
+
+    setIsDrawing(true);
+    const draw = new Draw({ source: vectorSource, type });
+    map.addInteraction(draw);
+
+    draw.on("drawend", (event) => {
+      const geometry = event.feature.getGeometry();
+      if (!geometry) return;
+
+      const newCoordinates = geometry.getCoordinates();
+      if (type === "LineString") {
+        setLineStringCoordinates((prev) => [...prev, ...newCoordinates]);
+        setLineStringModalOpen(true);
+      } else if (type === "Polygon") {
+        setPolygonCoordinates(newCoordinates);
+        setPolygonModalOpen(true);
+      }
+      setIsDrawing(false);
+      map.removeInteraction(draw);
+    });
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        draw.finishDrawing();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      map.removeInteraction(draw);
+    };
+  };
 
   return (
     <>
