@@ -106,6 +106,27 @@ function App() {
     startDrawing("Polygon", insertIndex);
   };
 
+  const handleDrawingClick = () => {
+    setIsFirstClick(false);
+    if (isFirstClick) {
+      setLineStringModalOpen(true);
+    }
+    startDrawing("LineString");
+  };
+
+  const handleMissionModalOpen = () => {
+    setLineStringModalOpen(true);
+  };
+
+  const handlePolygonModalClose = () => {
+    setPolygonModalOpen(false);
+  };
+
+  const handlePolygonModalBackButton = () => {
+    setPolygonModalOpen(false);
+    setLineStringModalOpen(true);
+  };
+
   return (
     <>
       <div className="h-screen flex flex-col">
