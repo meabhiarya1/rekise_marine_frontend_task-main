@@ -112,4 +112,4 @@ The project is under MIT license.
 <img src="http://avatars.githubusercontent.com/u/90932403?s=400&u=f2bbc351c58e119c860ac704d1b305227f4b7242&v=4" width="100px;" alt="Abhishek Kumar"/><br />
 <sub><b>Abhishek Kumar</b></sub>
 </a><br />
-<a href="https://github.com/meabhiarya1/rekise_marine_frontend_task/commits?author=meabhiarya1" title="Code">💻</a>
+<a href="https://github.com/meabhiarya1/rekise_marine_frontend_task-main/commits?author=meabhiarya1" title="Code">💻</a>
