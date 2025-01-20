@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import MapComponent from "./Components/MapComponent/MapComponent";
 import MissionCreationModal from "./Components/MissionCreationModal/MissionCreationModal";
 import PolygonToolModal from "./Components/PolygonToolModal/PolygonToolModal";
+import { calculateDistance } from "./calculateDistance/calculateDistance";
+import { toast } from "react-toastify";
 
 function App() {
   const mapElement = useRef(null);
@@ -79,6 +81,7 @@ function App() {
 
   const handleImportPolygon = () => {
     if (!polygonCoordinates.length || dropdownIndex === null) {
+      toast.error("No polygon data or dropdown index specified.");
       console.error("No polygon data or dropdown index specified.");
       return;
     }
@@ -90,12 +93,53 @@ function App() {
     });
 
     console.log("Polygon imported into LineString.");
+    toast.success("Polygon imported into LineString.");
     setPolygonModalOpen(false);
     setDropdownIndex(null);
   };
 
   const handleGenerateData = () => {
-    alert(lineStringCoordinates);
+    if (lineStringCoordinates.length < 2) {
+      toast.error("Not enough coordinates to generate data.");
+      console.error("Not enough coordinates to generate data.");
+      return;
+    }
+    // Convert coordinates data to CSV format
+    const headers = ["WP", "Latitude", "Longitude", "Distance (m)"];
+    const rows = lineStringCoordinates.map((coordinate, index) => {
+      const nextCoordinate = lineStringCoordinates[index + 1]; // Get the next coordinate
+      const distance = nextCoordinate
+        ? calculateDistance(coordinate, nextCoordinate) // Calculate distance if the next coordinate exists
+        : 0; // If it's the last coordinate, distance is 0
+
+      return [
+        index, // WP
+        coordinate[0], // Latitude
+        coordinate[1], // Longitude
+        +distance, // Distance to the next point
+      ];
+    });
+
+    // Combine headers and rows into a CSV string
+    const csvContent = [
+      headers.join(","), // Header row
+      ...rows.map((row) => row.join(",")), // Data rows
+    ].join("\n");
+
+    // Create a Blob from the CSV content
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+    // Create a link element to trigger the download
+    const link = document.createElement("a");
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", "coordinates.csv"); // The name of the file to download
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click(); // Trigger the download
+      document.body.removeChild(link); // Clean up the link element
+    }
   };
 
   const handleDropdownAction = (action, index) => {

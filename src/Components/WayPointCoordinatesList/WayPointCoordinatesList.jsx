@@ -10,8 +10,8 @@ const WayPointCoordinatesList = ({
 }) => {
   return (
     <div className="px-4">
-      <div className="max-h-[400px] overflow-y-auto border border-gray-200 rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
+      <div className="max-h-[400px] overflow-y-auto border border-gray-200 rounded-lg relative">
+        <table className="min-w-full divide-y divide-gray-200 ">
           <thead>
             <tr>
               <th className="w-12 px-3 py-2">
@@ -32,16 +32,16 @@ const WayPointCoordinatesList = ({
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 ">
             {coordinates.map((waypoint, index) => {
-              const isArrayOf = Array.isArray(waypoint[0]);
+              const isArrayOf = Array.isArray(waypoint[0]); // Check if it is a polygon
               const distance =
                 index === 0 || isArrayOf
                   ? "--"
                   : calculateDistance(coordinates[index - 1], waypoint);
 
               return (
-                <tr key={index} className="hover:bg-gray-100 bg-gray-50">
+                <tr key={index} className="hover:bg-gray-100 bg-gray-50 ">
                   <td className="px-3 py-2 flex items-center gap-4">
                     <div className="w-2 h-5 bg-gray-200 rounded-lg"></div>
                     <input
@@ -54,17 +54,15 @@ const WayPointCoordinatesList = ({
                     {`${index}`.padStart(2, "0")}
                   </td>
                   <td className="px-3 py-2 text-sm">
-                    {isArrayOf ? "Polygon" : waypoint[1].toFixed(2) + ","}{" "}
-                    {isArrayOf ? index : waypoint[1].toFixed(2)}
+                    {isArrayOf
+                      ? "Polygon"
+                      : `${waypoint[0].toFixed(2)}, ${waypoint[1].toFixed(2)}`}
                   </td>
                   <td className="px-3 py-2 text-sm text-right">
-                    {distance === "--"
-                      ? distance
-                      : String(distance || waypoint[0]).slice(0, 2) +
-                        "." +
-                        String(distance || waypoint[1]).slice(3, 5)}
+                    {distance === "--" ? distance : distance.toFixed(2)}{" "}
+                    {/* Display the distance */}
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2  ">
                     <button
                       className="text-gray-500 hover:text-gray-700"
                       onClick={() => setDropdownIndex(index)}
@@ -101,7 +99,7 @@ const WayPointCoordinatesList = ({
                         </li>
                       </ul>
                     )}
-                  </td>
+                  </td>{" "}
                 </tr>
               );
             })}

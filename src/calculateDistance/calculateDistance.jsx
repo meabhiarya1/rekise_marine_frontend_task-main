@@ -1,4 +1,5 @@
 export const calculateDistance = (startPoint, endPoint) => {
+  
   const earthRadius = 6371e3; // Earth's radius in meters
 
   const startLatitudeRadians = (startPoint[1] * Math.PI) / 180;

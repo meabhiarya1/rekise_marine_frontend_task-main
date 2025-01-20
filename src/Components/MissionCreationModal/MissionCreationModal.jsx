@@ -20,7 +20,7 @@ const MissionCreationModal = ({
           handle=".draggable-handle"
           cancel=".non-draggable" // Prevent buttons and other elements from being draggable
         >
-          <div className="bg-white rounded-lg shadow-lg p-3 relative">
+          <div className="bg-white rounded-lg shadow-lg p-3 ">
             {/* Draggable Handle */}
             <div className="draggable-handle cursor-move bg-gray-100 p-2 rounded-t-lg flex justify-between items-center">
               <h2 className="text-lg font-bold text-gray-800">
@@ -42,7 +42,6 @@ const MissionCreationModal = ({
                 setDropdownIndex={setDropdownIndex}
                 dropdownIndex={dropdownIndex}
                 handleDropdownAction={handleDropdownAction}
-                
               />
             ) : (
               <h3 className="text-lg font-bold text-gray-800">
