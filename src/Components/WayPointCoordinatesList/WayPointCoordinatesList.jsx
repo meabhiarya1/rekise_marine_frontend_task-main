@@ -10,8 +10,8 @@ const WayPointCoordinatesList = ({
 }) => {
   return (
     <div className="px-4">
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 border-b border-gray-200">
+      <div className="max-h-[400px] overflow-y-auto border border-gray-200 rounded-lg">
+        <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
               <th className="w-12 px-3 py-2">
@@ -32,10 +32,9 @@ const WayPointCoordinatesList = ({
               </th>
             </tr>
           </thead>
-          <tbody className="border border-gray-200 rounded-lg divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200">
             {coordinates.map((waypoint, index) => {
               const isArrayOf = Array.isArray(waypoint[0]);
-              console.log(isArrayOf, waypoint);
               const distance =
                 index === 0 || isArrayOf
                   ? "--"
@@ -110,7 +109,7 @@ const WayPointCoordinatesList = ({
         </table>
       </div>
     </div>
-    );
+  );
 };
 
 export default WayPointCoordinatesList;
